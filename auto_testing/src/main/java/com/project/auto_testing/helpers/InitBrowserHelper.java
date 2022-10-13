@@ -1,4 +1,4 @@
-package helpers;
+package com.project.auto_testing.helpers;
 
 import java.time.Duration;
 
@@ -7,14 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.stereotype.Service;
 
-import enums.BrowserTypes;
+import com.project.auto_testing.enums.BrowserTypes;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.managers.OperaDriverManager;
 
+@Service
 public class InitBrowserHelper {
 
-	public WebDriver initBrowser(BrowserTypes browserTypes, String url, Integer sleep1, Integer sleep2) {
+	public WebDriver initBrowser(BrowserTypes browserTypes, String url, Double maxSleepTime) {
 		WebDriver driver = null;
 		switch (browserTypes) {
 		case CHROME:
@@ -36,12 +39,12 @@ public class InitBrowserHelper {
 		default:
 			break;
 		}
-		if(StringUtils.isNotBlank(url)) {
+		// waiting to throw exception
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(Math.round(maxSleepTime)));
+		if (StringUtils.isNotBlank(url)) {
 			driver.navigate().to(url);
 		}
 		driver.manage().window().maximize();
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(sleep1));
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(sleep2));
 		return driver;
 	}
 }
