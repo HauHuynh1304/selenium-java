@@ -13,25 +13,19 @@ import com.project.auto_testing.models.TestCase;
 
 @Service
 public class ExampleService {
-	
+
 	private final static String filePath = "D:\\project\\selenium\\selenium-java\\test_case_example\\test_case.xlsx";
 
 	@Autowired
 	private ActionHelper actionHelper;
-	
-	public String demo() {
-		try {
-			LinkedHashMap<Integer, TestCase> data = ExcelHelper.readFile(filePath);
-			data = ExcelHelper.readFile(filePath);
 
-			for (Map.Entry<Integer, TestCase> entry : data.entrySet()) {
-				actionHelper.action(entry.getValue());
-			}
-			ExcelHelper.createReport(data);
+	public void demo() throws IOException, InterruptedException {
+		LinkedHashMap<Integer, TestCase> data = ExcelHelper.readFile(filePath);
+		data = ExcelHelper.readFile(filePath);
 
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
+		for (Map.Entry<Integer, TestCase> entry : data.entrySet()) {
+			actionHelper.excuteAction(entry.getValue());
 		}
-		return null;
+		ExcelHelper.createReport(data);
 	}
 }

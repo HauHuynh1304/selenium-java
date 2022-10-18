@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+
+	<property name="LOG_PATH" value="Logs" />
+	<property name="LOG_PATTERN"
+		value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n" />
+
+	<appender name="stdout"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<!-- 
+	<appender name="SAVE-TO-NOMAL-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>
+				${LOG_PATH}/Normal/HR_System_Log_Normal_%d{dd-MM-yyyy}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>100MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="SAVE-TO-ERROR-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>
+				${LOG_PATH}/Error/HR_System_Log_Error_%d{dd-MM-yyyy}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>100MB</totalSizeCap>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+	 -->
+	<springProfile name="dev">
+	<!-- 
+		<logger name="com.company.hrsystem">
+			<appender-ref ref="SAVE-TO-NOMAL-FILE" level="debug" />
+			<appender-ref ref="SAVE-TO-ERROR-FILE" level="error" />
+		</logger>
+	
+		<logger name="com.zaxxer.hikari.pool.PoolBase" level="ERROR"/>
+	    <logger name="com.zaxxer.hikari.pool.HikariPool" level="ERROR"/>
+	    <logger name="com.zaxxer.hikari.HikariDataSource" level="ERROR"/>
+ 	-->
+		<root level="debug" additivity="false">
+			<appender-ref ref="stdout" />
+		</root>
+  	</springProfile>
+	<!--
+	<springProfile name="prod">
+		<logger name="com.company.hrsystem">
+			<appender-ref ref="SAVE-TO-NOMAL-FILE" level="info" />
+			<appender-ref ref="SAVE-TO-ERROR-FILE" level="error" />
+		</logger>
+
+		<root level="info" additivity="false">
+			<appender-ref ref="stdout" />
+		</root>
+  	</springProfile>
+  	-->
+</configuration>

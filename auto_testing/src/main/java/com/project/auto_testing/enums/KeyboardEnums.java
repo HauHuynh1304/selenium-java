@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum WebElementTypes {
+public enum KeyboardEnums {
 
-	VALUE("value"), CLASS("class"), TYPE("type");
+	A("a");
 
 	private String value;
 

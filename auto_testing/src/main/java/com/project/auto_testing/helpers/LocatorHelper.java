@@ -7,20 +7,24 @@ import com.project.auto_testing.common.LocationTypes;
 public class LocatorHelper {
 
 	public static By locator(String locateType, String locateValue) {
-		By webElement = null;
+		By by = null;
 		switch (locateType) {
 		case LocationTypes.ID:
-			webElement = By.id(locateValue);
+			by = By.id(locateValue);
 			break;
 		case LocationTypes.NAME:
-			webElement = By.name(locateValue);
+			by = By.name(locateValue);
 			break;
 		case LocationTypes.XPATH:
-			webElement = By.xpath(locateValue);
+			by = By.xpath(locateValue);
+			break;
+		case LocationTypes.CLASS:
+			by = By.className(locateValue);
 			break;
 		default:
 			break;
 		}
-		return webElement;
+		return by;
 	}
+
 }

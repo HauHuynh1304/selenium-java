@@ -157,12 +157,14 @@ public class ExcelHelper {
 		}
 	}
 
-	private static void closeAndFlushOutput(OutputStream outStream) {
+	private static void closeAndFlushOutput(OutputStream outStream) throws IOException {
 		try {
 			outStream.flush();
 			outStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			outStream.close();
 		}
 	}
 
@@ -171,7 +173,6 @@ public class ExcelHelper {
 		try {
 			createDocument(outStream, data);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

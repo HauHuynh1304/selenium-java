@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.project.auto_testing.models.TestCase;
@@ -13,15 +14,17 @@ import com.project.auto_testing.models.TestCase;
 public class WaitHelper {
 
 	/*
-	 * Wait for catch web element
+	 * Waiting for catch web element
 	 */
-	public static void setFluentWait(TestCase testCase, WebDriver driver) {
-		new FluentWait<WebDriver>(driver).withTimeout(Duration.ofMillis(Math.round(testCase.getMaxSleepTime())))
+	public static Wait<WebDriver> setFluentWait(TestCase testCase, WebDriver driver) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofMillis(Math.round(testCase.getMaxSleepTime())))
 				.pollingEvery(Duration.ofMillis(1000)).ignoring(NoSuchElementException.class);
+		return wait;
 	}
 
 	/*
-	 * Wait for catch new URL after navigate
+	 * Waiting for catch new URL after navigate
 	 */
 	public static String getUrlAfterNavigate(String preUrl, WebDriver driver) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(10000));

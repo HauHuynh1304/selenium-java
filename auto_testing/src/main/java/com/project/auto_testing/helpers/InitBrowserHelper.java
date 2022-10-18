@@ -1,7 +1,5 @@
 package com.project.auto_testing.helpers;
 
-import java.time.Duration;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,10 +38,10 @@ public class InitBrowserHelper {
 			break;
 		}
 		// waiting to throw exception
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(Math.round(maxSleepTime)));
 		if (StringUtils.isNotBlank(url)) {
 			driver.navigate().to(url);
 		}
+
 		driver.manage().window().maximize();
 		return driver;
 	}

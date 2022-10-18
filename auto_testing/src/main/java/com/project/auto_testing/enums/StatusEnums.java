@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum WebElementTypes {
+public enum StatusEnums {
 
-	VALUE("value"), CLASS("class"), TYPE("type");
+	OK("OK"), NG("NG");
 
 	private String value;
 
